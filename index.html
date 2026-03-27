@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Trading Agent - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .neon-text { text-shadow: 0 0 10px #22c55e; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="flex justify-between items-center mb-8">
+        <div>
+            <h1 class="text-2xl font-bold tracking-tight">CRYPTO<span class="text-green-500">AI</span>_AGENT</h1>
+            <p class="text-xs text-slate-400">Status: <span class="text-green-500 animate-pulse">● Online</span></p>
+        </div>
+        <div class="glass p-2 rounded-full">
+            <i data-lucide="user" class="w-6 h-6"></i>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-8">
+        <div class="glass p-4 rounded-2xl">
+            <p class="text-xs text-slate-400 mb-1">Total Balance</p>
+            <h2 class="text-xl font-bold">$1,240.50</h2>
+        </div>
+        <div class="glass p-4 rounded-2xl border-l-4 border-green-500">
+            <p class="text-xs text-slate-400 mb-1">Daily Profit</p>
+            <h2 class="text-xl font-bold text-green-400">+$45.20</h2>
+        </div>
+    </div>
+
+    <div class="glass p-6 rounded-3xl mb-8 relative overflow-hidden">
+        <div class="flex justify-between items-end">
+            <div>
+                <h3 class="text-sm font-medium text-slate-300">BTC/USDT</h3>
+                <p class="text-3xl font-black mt-1">$64,231.00</p>
+            </div>
+            <div class="text-right">
+                <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">+2.4%</span>
+            </div>
+        </div>
+        <div class="mt-4 h-16 w-full bg-gradient-to-t from-green-500/20 to-transparent rounded-lg border-b-2 border-green-500"></div>
+    </div>
+
+    <h3 class="text-lg font-bold mb-4">Activity Logs</h3>
+    <div class="space-y-3">
+        <div class="glass p-3 rounded-xl flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-green-500/20 p-2 rounded-lg"><i data-lucide="shopping-cart" class="w-4 h-4 text-green-500"></i></div>
+                <div>
+                    <p class="text-sm font-semibold">BUY SOL/USDT</p>
+                    <p class="text-[10px] text-slate-500">14:20:05 • RSI Oversold</p>
+                </div>
+            </div>
+            <p class="text-sm font-bold">$145.20</p>
+        </div>
+        
+        <div class="glass p-3 rounded-xl flex items-center justify-between opacity-60">
+            <div class="flex items-center gap-3">
+                <div class="bg-slate-500/20 p-2 rounded-lg"><i data-lucide="eye" class="w-4 h-4 text-slate-400"></i></div>
+                <div>
+                    <p class="text-sm font-semibold">Scanning Market...</p>
+                    <p class="text-[10px] text-slate-500">14:15:00 • Trend Neutral</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
