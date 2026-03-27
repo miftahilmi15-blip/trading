@@ -3,76 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Trading Agent - Dashboard</title>
+    <title>AI Trading - Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { background-color: #0f172a; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .neon-text { text-shadow: 0 0 10px #22c55e; }
+        .active-nav { color: #22c55e; border-bottom: 2px solid #22c55e; }
+        .page { display: none; transition: all 0.3s ease; }
+        .page-active { display: block; }
     </style>
 </head>
-<body class="p-4 md:p-8">
-    <div class="flex justify-between items-center mb-8">
+<body class="pb-24"> <header class="p-6 flex justify-between items-center sticky top-0 bg-[#0f172a]/80 backdrop-blur-md z-50">
         <div>
-            <h1 class="text-2xl font-bold tracking-tight">CRYPTO<span class="text-green-500">AI</span>_AGENT</h1>
-            <p class="text-xs text-slate-400">Status: <span class="text-green-500 animate-pulse">● Online</span></p>
+            <h1 class="text-xl font-black tracking-tighter">CRYPTO<span class="text-green-500 underline">AI</span></h1>
+            <p id="current-page-title" class="text-[10px] text-slate-400 uppercase tracking-widest">Dashboard View</p>
         </div>
-        <div class="glass p-2 rounded-full">
-            <i data-lucide="user" class="w-6 h-6"></i>
+        <div class="flex gap-3">
+            <button onclick="alert('Bot Restarting...')" class="bg-red-500/20 text-red-400 p-2 rounded-lg text-xs font-bold">RESTART</button>
         </div>
-    </div>
+    </header>
 
-    <div class="grid grid-cols-2 gap-4 mb-8">
-        <div class="glass p-4 rounded-2xl">
-            <p class="text-xs text-slate-400 mb-1">Total Balance</p>
-            <h2 class="text-xl font-bold">$1,240.50</h2>
-        </div>
-        <div class="glass p-4 rounded-2xl border-l-4 border-green-500">
-            <p class="text-xs text-slate-400 mb-1">Daily Profit</p>
-            <h2 class="text-xl font-bold text-green-400">+$45.20</h2>
-        </div>
-    </div>
-
-    <div class="glass p-6 rounded-3xl mb-8 relative overflow-hidden">
-        <div class="flex justify-between items-end">
-            <div>
-                <h3 class="text-sm font-medium text-slate-300">BTC/USDT</h3>
-                <p class="text-3xl font-black mt-1">$64,231.00</p>
-            </div>
-            <div class="text-right">
-                <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">+2.4%</span>
-            </div>
-        </div>
-        <div class="mt-4 h-16 w-full bg-gradient-to-t from-green-500/20 to-transparent rounded-lg border-b-2 border-green-500"></div>
-    </div>
-
-    <h3 class="text-lg font-bold mb-4">Activity Logs</h3>
-    <div class="space-y-3">
-        <div class="glass p-3 rounded-xl flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="bg-green-500/20 p-2 rounded-lg"><i data-lucide="shopping-cart" class="w-4 h-4 text-green-500"></i></div>
-                <div>
-                    <p class="text-sm font-semibold">BUY SOL/USDT</p>
-                    <p class="text-[10px] text-slate-500">14:20:05 • RSI Oversold</p>
-                </div>
-            </div>
-            <p class="text-sm font-bold">$145.20</p>
-        </div>
+    <main class="px-6">
         
-        <div class="glass p-3 rounded-xl flex items-center justify-between opacity-60">
-            <div class="flex items-center gap-3">
-                <div class="bg-slate-500/20 p-2 rounded-lg"><i data-lucide="eye" class="w-4 h-4 text-slate-400"></i></div>
-                <div>
-                    <p class="text-sm font-semibold">Scanning Market...</p>
-                    <p class="text-[10px] text-slate-500">14:15:00 • Trend Neutral</p>
+        <section id="page-dashboard" class="page page-active">
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="glass p-4 rounded-2xl">
+                    <p class="text-[10px] text-slate-400 mb-1">PROFIT 24H</p>
+                    <h2 class="text-xl font-bold text-green-400">+$12.50</h2>
+                </div>
+                <div class="glass p-4 rounded-2xl">
+                    <p class="text-[10px] text-slate-400 mb-1">TOTAL TRADES</p>
+                    <h2 class="text-xl font-bold">48</h2>
                 </div>
             </div>
-        </div>
-    </div>
+            
+            <div class="glass p-6 rounded-3xl mb-6">
+                <p class="text-xs text-slate-400">Current Balance</p>
+                <h3 class="text-3xl font-black mt-1">$1,042.88</h3>
+                <div class="mt-4 flex gap-2">
+                    <span class="text-[10px] bg-slate-700 px-2 py-1 rounded">BINANCE API: CONNECTED</span>
+                </div>
+            </div>
+
+            <h3 class="font-bold mb-4">Live Signals</h3>
+            <div class="space-y-3" id="signal-list">
+                <div class="glass p-3 rounded-xl flex justify-between items-center border-l-4 border-yellow-500">
+                    <span class="text-sm font-medium">BTC/USDT</span>
+                    <span class="text-xs text-yellow-400 font-mono italic">SCANNING...</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-logs" class="page">
+            <h3 class="font-bold mb-4">Transaction History</h3>
+            <div class="space-y-2 text-xs font-mono">
+                <div class="p-2 border-b border-slate-800">[10:45:01] BUY SOL at $145.20</div>
+                <div class="p-2 border-b border-slate-800 text-green-500">[11:20:44] SELL SOL at $148.00 (PROFIT)</div>
+                <div class="p-2 border-b border-slate-800 text-slate-500">[12:00:00] NO SIGNAL DETECTED</div>
+            </div>
+        </section>
+
+        <section id="page-settings" class="page">
+            <h3 class="font-bold mb-4">Bot Configuration</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="text-[10px] text-slate-400">TRADING PAIR</label>
+                    <input type="text" value="BTC/USDT" class="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 mt-1">
+                </div>
+                <div>
+                    <label class="text-[10px] text-slate-400">STRATEGY</label>
+                    <select class="w-full bg-slate-800 p-3 rounded-xl border border-slate-700 mt-1">
+                        <option>RSI + MA Cross</option>
+                        <option>Scalping Extreme</option>
+                    </select>
+                </div>
+                <button class="w-full bg-green-500 text-slate-900 font-bold py-3 rounded-xl">SAVE SETTINGS</button>
+            </div>
+        </section>
+
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 glass border-t border-white/10 px-6 py-4 flex justify-between items-center z-50">
+        <button onclick="showPage('dashboard')" class="nav-item flex flex-col items-center gap-1 active-nav" id="nav-dashboard">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+            <span class="text-[10px]">Home</span>
+        </button>
+        <button onclick="showPage('logs')" class="nav-item flex flex-col items-center gap-1 text-slate-500" id="nav-logs">
+            <i data-lucide="terminal" class="w-5 h-5"></i>
+            <span class="text-[10px]">Logs</span>
+        </button>
+        <button onclick="showPage('settings')" class="nav-item flex flex-col items-center gap-1 text-slate-500" id="nav-settings">
+            <i data-lucide="settings-2" class="w-5 h-5"></i>
+            <span class="text-[10px]">Setup</span>
+        </button>
+    </nav>
 
     <script>
+        // Inisialisasi Icon
         lucide.createIcons();
+
+        // Fungsi Pindah Halaman Tanpa Reload (Gak bakalan 404)
+        function showPage(pageName) {
+            // Sembunyikan semua halaman
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('page-active'));
+            // Hapus status aktif di semua tombol nav
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active-nav', 'text-slate-500'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.add('text-slate-500'));
+
+            // Tampilkan halaman yang dipilih
+            document.getElementById('page-' + pageName).classList.add('page-active');
+            // Aktifkan tombol nav yang dipilih
+            document.getElementById('nav-' + pageName).classList.add('active-nav');
+            document.getElementById('nav-' + pageName).classList.remove('text-slate-500');
+            
+            // Update Judul Header
+            document.getElementById('current-page-title').innerText = pageName + " View";
+        }
     </script>
 </body>
 </html>
